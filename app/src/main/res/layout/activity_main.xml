@@ -13,12 +13,21 @@
         android:orientation="vertical">
 
 
-    <TextView
+
+        <EditText
+            android:id="@+id/name_Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textCapWords"/>
+
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Toppings"
-        android:textAllCaps="true" />
+        android:textAllCaps="true"
+            android:layout_marginTop="16dp"/>
 
     <CheckBox
         android:id="@+id/whipped_Cream_Checkbox"

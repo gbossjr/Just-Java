@@ -3,6 +3,7 @@ package android.example.justjava;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +24,15 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_Cream_Checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+
         CheckBox chocolateCheckBox = findViewById(R.id.chocolate_Checkbox);
         boolean hasChocolate = chocolateCheckBox.isChecked();
+
+        EditText nameCustomer = findViewById(R.id.name_Input);
+        String customerName = nameCustomer.getText().toString();
+
         int price = calculatePrice();
-        displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate));
+        displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate, customerName));
 
 
     }
@@ -50,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
      * @return text summary
      */
 
-    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate) {
-        String priceMessage = "Name: Kaptain Kumal";
+    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate, String nameOfCustomer) {
+        String priceMessage = nameOfCustomer;
         priceMessage += "\nAdd Whipped Cream? " + addWhippedCream;
         priceMessage += "\nAdd Chocolate? " + addChocolate;
         priceMessage += "\nQuantity: " + quantity;
