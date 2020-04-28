@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         EditText nameCustomer = findViewById(R.id.name_Input);
         String customerName = nameCustomer.getText().toString();
 
-        int price = calculatePrice();
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
         displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate, customerName));
 
 
@@ -42,8 +43,22 @@ public class MainActivity extends AppCompatActivity {
      * Calculates the price of the order.
      *
      */
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
+        //price of one cup of coffee
+        int basePrice = 5;
+
+        //add one dollar to baseprice for whipped cream
+        if (hasWhippedCream == true) {
+
+            basePrice = basePrice + 1;
+        }
+        //add two dollars to baseprice for chocolate
+        if (hasChocolate == true) {
+
+            basePrice = basePrice + 2;
+        }
+
+        return quantity * basePrice;
 
     }
 
@@ -76,11 +91,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void incrememt(View view) {
+        if (quantity == 100){
+            Toast.makeText(this,"You cannot have more than 100 cups of coffee", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         quantity = quantity + 1;
         displayQuantity(quantity);
     }
 
     public void decrement(View view) {
+        if (quantity == 1){
+            Toast.makeText(this,"You cannot have less than 1 cup of coffee", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         quantity = quantity - 1;
         displayQuantity(quantity);
     }
